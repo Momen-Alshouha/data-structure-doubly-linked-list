@@ -130,6 +130,7 @@
     <ClCompile Include="data-structures-doubly-linked-list.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DoublyLinkedList.h" />
     <ClInclude Include="Iterator.h" />
     <ClInclude Include="Node.h" />
   </ItemGroup>

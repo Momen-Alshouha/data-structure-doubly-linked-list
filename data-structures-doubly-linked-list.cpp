@@ -1,6 +1,9 @@
 #include <iostream>
+#include "DoublyLinkedList.h"
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	DoublyLinkedList<int> doublyLinkedList;
+	cout << doublyLinkedList.length << endl;
 }
