@@ -23,6 +23,15 @@ public:
 	DoublyLinkedList();
 	~DoublyLinkedList();
 
+
+	Node<T>* GetHead() {
+		return _Head;
+	}
+
+	Node<T>* GetTail() {
+		return _Tail;
+	}
+
 	short GetLength() {
 		short counter = 0;
 		for (Iterator<T> itr = _begin(); itr != _end(); itr.Next())
@@ -32,7 +41,10 @@ public:
 		return counter;
 	}
 
+	// read only properties
 	__declspec(property(get = GetLength)) short length;
+	__declspec(property(get = GetHead)) Node<T>* head;
+	__declspec(property(get = GetTail)) Node<T>* tail;
 
 };
 
