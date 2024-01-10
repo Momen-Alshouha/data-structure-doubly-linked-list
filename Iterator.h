@@ -12,7 +12,7 @@ public:
 	
 	Iterator(Node<T>* CurrentNode) :_CurrentNode(CurrentNode){};
 
-	Node<T>* GetCurrenctNode() {
+	Node<T>* GetCurrentNode() {
 		return _CurrentNode;
 	}
 

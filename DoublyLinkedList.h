@@ -60,11 +60,14 @@ DoublyLinkedList<T>::DoublyLinkedList()
 template<typename T>
 DoublyLinkedList<T>::~DoublyLinkedList()
 {
-	for (Iterator<T> itr = _begin(); itr != _end(); itr.Next())
+	for (Iterator<T> itr = _begin(); itr != _end(); )
 	{
-		delete itr;
+		Node<T>* current = itr.current_node;
+		// Move to the next node before deleting the current becouse if the current deleted before moving then we can't move
+		itr.Next(); 
+		delete current;
 	}
 	_Head = nullptr;
 	_Tail = nullptr;
-	length= 0;
+	_Length= 0;
 }
