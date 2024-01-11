@@ -94,13 +94,14 @@ public:
 		if (_Head==nullptr)
 		{
 			_Head = _Tail = NewNode;
+			_Length++;
 			return;
 		}
 
 		NewNode->next = _Head;
 		_Head->prev = NewNode;
 		_Head = NewNode;
-	
+		_Length++;
 	};
 
 	void InsertEnd(T DataToInsert) {
@@ -115,12 +116,14 @@ public:
 		if (_Head==nullptr)
 		{
 			_Head = _Tail = NewNode;
+			_Length++;
 			return;
 		}
 
 		_Tail->next = NewNode;
 		NewNode->prev = _Tail;
 		_Tail = NewNode;
+		_Length++;
 	}
 
 	void InsertBefore(T DataToInsertBefore,T NewData) {
@@ -148,7 +151,7 @@ public:
 		}
 
 		NodeToInsertBefore->prev = NewNode;
-
+		_Length++;
 	}
 
 	void InsertAfter(T DataToInsertAfter,T NewData) {
@@ -181,7 +184,7 @@ public:
 		{
 			_Tail = NewNode; 
 		}
-
+		_Length++;
 	}
 
 	void InsertAtIndex(short index,T value) {
@@ -216,8 +219,62 @@ public:
 		}
 
 		NodeAtIndex->prev = NewNodeToInsert;
-
+		_Length++;
 	}
+
+	void DeleteBack() {
+		if (_Tail != nullptr) {
+			if (_Tail->prev==nullptr) // means that there is only one node 
+			{
+				_Head = nullptr;
+				_Tail = nullptr;
+			}
+			else {
+				Node<T>* TempTail = _Tail;
+				_Tail = _Tail->prev;
+				_Tail->next = nullptr;
+				delete TempTail;
+			}
+			_Length--;
+		}
+	}
+
+
+	void DeleteFront() {
+		if (_Head != nullptr) {
+			Node<T>* HeadTemp = _Head;
+			_Head = HeadTemp->next;
+			if (_Head!=nullptr) // after set new head check if it is not null 
+			{
+				_Head->prev = nullptr;
+			}
+			delete HeadTemp;
+			_Length--;
+		}
+	}
+
+	void DeleteAtIndex(short index) {
+		if (_Head != nullptr && (index >= 0 && index < _Length)) {
+			if (index == 0) {
+				DeleteFront();
+			}
+			else if (index == _Length - 1) {
+				DeleteBack();
+			}
+			else {
+				Node<T>* NodeAtIndex = FindByIndex(index);
+
+				NodeAtIndex->prev->next = NodeAtIndex->next;
+
+				NodeAtIndex->next->prev = NodeAtIndex->prev;
+
+				delete NodeAtIndex;
+			}
+
+			_Length--;
+		}
+	}
+
 
 	void UpdateAtIndex(short index, T NewValue) {
 		Node<T>* NodeToUpdate = FindByIndex(index);
@@ -286,7 +343,7 @@ DoublyLinkedList<T>::DoublyLinkedList()
 {
 	_Head = nullptr;
 	_Tail = nullptr;
-	_Length = GetLength();
+	_Length = 0;
 }
 
 template<typename T>
