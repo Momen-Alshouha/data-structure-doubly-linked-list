@@ -285,7 +285,28 @@ public:
 		}
 	}
 
+	void Concat(DoublyLinkedList<T>& other) {
+		
+		// directly update the pointers of the tail of the first list and the head of the other list without loop
+		
+		if (_Tail != nullptr && other._Head != nullptr) {
 
+			_Tail->next = other._Head;
+			other._Head->prev = _Tail;
+			_Tail = other._Tail;
+
+			// Update the length of the current list
+			_Length += other._Length;
+
+			// Clear the other list
+			other._Head = nullptr;
+			other._Tail = nullptr;
+			other._Length = 0;
+		
+		}
+	}
+
+		
 	T GetNthNodeValue(short N) {
 		if (N>=1)
 		{

@@ -4,7 +4,7 @@
 
 int main()
 {
-	DoublyLinkedList<int> dLinkedList;
+	DoublyLinkedList<int> dLinkedList, dLinkedList2;
 	
 	dLinkedList.InsertEnd(1);
 	dLinkedList.InsertEnd(2);
@@ -30,4 +30,18 @@ int main()
 	dLinkedList.PrintFromFront();
 	cout << dLinkedList.length << endl;
 	// cout << dLinkedList.length << endl;
+	dLinkedList2.InsertEnd(1);
+	dLinkedList2.InsertEnd(2);
+	dLinkedList2.InsertEnd(3);
+	dLinkedList2.InsertEnd(4);
+	dLinkedList2.InsertBefore(2, 99);
+	dLinkedList2.InsertAfter(1, 100);
+	dLinkedList2.InsertAfter(99, 999);
+	dLinkedList2.InsertAfter(4, 555);
+
+	cout << endl<< endl;
+	dLinkedList.Concat(dLinkedList2);
+	dLinkedList.PrintFromFront();
+	dLinkedList.PrintFromBack();
+
 }
