@@ -231,6 +231,15 @@ public:
 
 	}
 
+	void UpdateAtIndex(short index, T NewValue) {
+		Node<T>* NodeToUpdate = FindByIndex(index);
+		if (NodeToUpdate!=nullptr)
+		{
+			NodeToUpdate->data = NewValue;
+			return;
+		}
+	}
+
 	
 	void PrintFromFront() {
 		for (Iterator<T> itr = _begin(); itr != _end(); itr.Next())

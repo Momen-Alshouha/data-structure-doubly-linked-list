@@ -16,6 +16,9 @@ int main()
 	dLinkedList.InsertAfter(4, 555); 
 	dLinkedList.InsertAtIndex(1, 213);
 	dLinkedList.PrintFromFront();
-	dLinkedList.PrintFromBack();
+	//dLinkedList.PrintFromBack();
+	dLinkedList.UpdateAtIndex(12, 888);
+	dLinkedList.UpdateAtIndex(3, 777);
+	dLinkedList.PrintFromFront();
 
 }
