@@ -171,6 +171,13 @@ public:
 
 		NewNode->prev = NodeToInsertAfter;
 		NewNode->next = NodeToInsertAfter->next;
+
+		if (NodeToInsertAfter->next != nullptr) {
+			// If the node to insert after is not the tail
+			// Update the previous pointer of the node following the new node
+			NodeToInsertAfter->next->prev = NewNode;
+		}
+
 		NodeToInsertAfter->next = NewNode;
 
 		if (NodeToInsertAfter == _Tail) // if node to insert after is tail we need to set new tail with the new node
@@ -225,7 +232,7 @@ public:
 	}
 
 	
-	void Print() {
+	void PrintFromFront() {
 		for (Iterator<T> itr = _begin(); itr != _end(); itr.Next())
 		{
 			cout << itr.data;
@@ -236,6 +243,22 @@ public:
 		}
 		cout << endl;
 	}
+
+	void PrintFromBack() {
+		Node<T> * TempTail= _Tail;
+		while (TempTail !=nullptr)
+		{
+			cout << TempTail->data;
+			if (TempTail!=_Head)
+			{
+				cout << " -> ";
+			}
+			TempTail=TempTail->prev;
+		}
+		cout << endl;
+		delete TempTail;
+	}
+
 };
 
 
