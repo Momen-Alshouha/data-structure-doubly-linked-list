@@ -59,6 +59,18 @@ public:
 		return nullptr;
 	}
 
+	Node<T>* FindByIndex(short index) {
+		short counter = 0;
+		for (Iterator<T> itr = _begin(); itr != _end(); itr.Next())
+		{
+			if (counter==index)
+			{
+				return itr.current_node;
+			}
+			counter++;
+		}
+		return nullptr;
+	}
 
 	bool isExisit(T DataToFind) {
 		Node<T>* NodeToFind = Find(DataToFind);
@@ -142,12 +154,73 @@ public:
 
 	}
 
-	void InsertAfter(T DataToInsertAfter) {
+	void InsertAfter(T DataToInsertAfter,T NewData) {
+		Node<T>* NodeToInsertAfter = Find(DataToInsertAfter);
+		
+		if (NodeToInsertAfter==nullptr) // if node not found
+		{
+			return;
+		}
 
+		Node<T>* NewNode = new(nothrow) Node<T>(NewData);
+
+		if (NewNode==nullptr)
+		{
+			cout << "Error throw memory allocation!\n";
+		}
+
+		NewNode->prev = NodeToInsertAfter;
+		NewNode->next = NodeToInsertAfter->next;
+		NodeToInsertAfter->next = NewNode;
+
+		if (NodeToInsertAfter == _Tail) // if node to insert after is tail we need to set new tail with the new node
+		{
+			_Tail = NewNode; 
+		}
 
 	}
 
-	void InsertAtIndex(short index) {
+	void InsertAtIndex(short index,T value) {
+
+		Node<T>* NodeAtIndex = FindByIndex(index); // the node at the passed index
+		
+		if (NodeAtIndex ==nullptr)
+		{
+			return;
+		}
+
+		Node<T>* NewNodeToInsert = new Node<T>(value);
+		
+
+		if (NodeAtIndex == _Head) {
+			// if the node at the specified index is the head of the list
+			// set the next pointer of the new node to the current head
+			NewNodeToInsert->next = _Head;
+
+			if (_Head != nullptr) {
+				// if the list is not empty, update the previous pointer of the current head
+				_Head->prev = NewNodeToInsert;
+			}
+
+			// update the head to be the new node
+			_Head = NewNodeToInsert;
+
+			return;
+		}
+
+		
+		NewNodeToInsert->prev = NodeAtIndex->prev;
+		NewNodeToInsert->next = NodeAtIndex;
+	
+		if (NodeAtIndex->prev!=nullptr)
+		{
+			// If the node at the specified index has a previous node
+			// Update the next pointer of the previous node to point to the new node
+			
+			NodeAtIndex->prev->next = NewNodeToInsert;
+		}
+
+		NodeAtIndex->prev = NewNodeToInsert;
 
 	}
 

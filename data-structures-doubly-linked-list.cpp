@@ -11,10 +11,11 @@ int main()
 	dLinkedList.InsertEnd(3);
 	dLinkedList.InsertEnd(4);
 	dLinkedList.InsertBefore(2, 99);
-	cout << boolalpha << dLinkedList.isExisit(99) << endl;
-	cout << boolalpha << dLinkedList.isExisit(999) << endl;
+	dLinkedList.InsertAfter(1, 100);
+	dLinkedList.InsertAfter(99, 999);
+	dLinkedList.InsertAfter(4, 555); 
+	dLinkedList.InsertAtIndex(1, 213);
 	dLinkedList.Print();
-	cout << dLinkedList.length << endl;
-	cout << dLinkedList.head->data << endl;
-	cout << dLinkedList.tail->data << endl;
+
+
 }
