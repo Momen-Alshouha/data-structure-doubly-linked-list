@@ -136,11 +136,8 @@ public:
 
 		if (NodeToInsertBefore==_Head)
 		{
-			NewNode->next = _Head;
-			_Head->prev = NewNode;
-			_Head = NewNode;
+			InsertBegin(NewData);
 			return;
-
 		}
 	
 		NewNode->next = NodeToInsertBefore;
@@ -200,17 +197,8 @@ public:
 		
 
 		if (NodeAtIndex == _Head) {
-			// if the node at the specified index is the head of the list
-			// set the next pointer of the new node to the current head
-			NewNodeToInsert->next = _Head;
 
-			if (_Head != nullptr) {
-				// if the list is not empty, update the previous pointer of the current head
-				_Head->prev = NewNodeToInsert;
-			}
-
-			// update the head to be the new node
-			_Head = NewNodeToInsert;
+			InsertBegin(value);
 
 			return;
 		}
@@ -240,7 +228,29 @@ public:
 		}
 	}
 
-	
+
+	T GetNthNodeValue(short N) {
+		if (N>=1)
+		{
+			return FindByIndex(N - 1)->data;
+		}
+	}
+
+	void Clear() {
+		Iterator<T> itr = _begin();
+
+		while (itr != _end()) {
+			Node<T>* current = itr.current_node;
+			itr.Next();
+			delete current;
+		}
+
+		_Head = nullptr;
+		_Tail = nullptr;
+		_Length = 0;
+	}
+
+
 	void PrintFromFront() {
 		for (Iterator<T> itr = _begin(); itr != _end(); itr.Next())
 		{
