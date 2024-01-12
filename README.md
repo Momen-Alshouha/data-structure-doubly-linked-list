@@ -76,10 +76,11 @@ To use this singly linked list implementation, follow these steps:
 
 ```cpp
 // Example usage of the LinkedList class
-#include "LinkedList.h"
+#include "DoublyLinkedList.h"
 
 int main() {
-    LinkedList<int> myList;
+    DoublyLinkedList<int> myIntsList; // list of integers
+    DoublyLinkedList<string> myStringsList; // list of strings
     
     // Perform operations like insertion, deletion, and retrieval here
     
