@@ -301,8 +301,8 @@ public:
 			// Clear the other list
 			other._Head = nullptr;
 			other._Tail = nullptr;
-			other._Length = 0;
-		
+			other._Length= 0;
+
 		}
 	}
 
@@ -311,6 +311,25 @@ public:
 		if (N>=1)
 		{
 			return FindByIndex(N - 1)->data;
+		}
+	}
+
+	 void Reverse() {
+		if (_Head!=nullptr)
+		{
+			Node<T>* TempHead = _Head;
+
+			for (Iterator<T> itr = _begin(); itr != _end(); )
+			{
+
+				Node<T>* Temp = itr.current_node;
+				Node<T>* TempNext = itr.current_node->next;
+				itr.Next();
+				Temp->next = Temp->prev;
+				Temp->prev = TempNext;
+			}
+			_Head = _Tail;
+			_Tail = TempHead;
 		}
 	}
 
