@@ -306,7 +306,24 @@ public:
 		}
 	}
 
-		
+	bool IsPalindrome() {
+		if (_Head != nullptr)
+		{
+			Node<T>* TempTail = _Tail;
+			for (Iterator<T> itr = _begin(); itr != _end(); itr.Next())
+			{
+				if (itr.current_node->data != TempTail->data)
+				{
+					return false;
+				}
+				TempTail = TempTail->prev;
+			}
+
+			return true;
+		}
+		return false;
+	}
+
 	T GetNthNodeValue(short N) {
 		if (N>=1)
 		{
